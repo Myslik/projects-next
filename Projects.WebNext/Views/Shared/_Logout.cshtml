@@ -1,0 +1,12 @@
+﻿@if (User.Identity.IsAuthenticated)
+{
+    <a href="#" class="btn btn-default btn-sm nav-user">
+        <img src="https://www.gravatar.com/avatar/39bc6bb6082f9444d7363e6fa2e4afd0">
+        <span>@User.Identity.Name</span>
+    </a>
+    <form asp-controller="Session" asp-action="Logout" method="post" class="form-horizontal" style="display: inline-block;" role="form">
+        <button type="submit" class="btn btn-default btn-sm">
+            <span class="fa fa-power-off"></span>
+        </button>
+    </form>
+}

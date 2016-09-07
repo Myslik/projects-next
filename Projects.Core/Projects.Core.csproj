@@ -7,7 +7,7 @@
     <ProjectGuid>{6F7374A6-23E2-4A81-AD0D-8DD6CC5251D8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Projects.Core</RootNamespace>
+    <RootNamespace>Projects</RootNamespace>
     <AssemblyName>Projects.Core</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -40,9 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IUser.cs" />
-    <Compile Include="IUserSession.cs" />
+    <Compile Include="Account\GetUserCommand.cs" />
+    <Compile Include="Account\IUserSession.cs" />
+    <Compile Include="Account\UserQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Account\User.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Architecture.Core\Architecture.Core.csproj">

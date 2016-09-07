@@ -1,0 +1,71 @@
+{
+  "version": 2,
+  "exports": {
+    "Architecture.Core/1.0.0": {
+      "type": "project",
+      "framework": ".NETFramework,Version=v4.5.2",
+      "compile": {
+        "bin/Debug/Architecture.Core.dll": {}
+      },
+      "runtime": {
+        "bin/Debug/Architecture.Core.dll": {}
+      },
+      "contentFiles": {
+        "bin/Debug/Architecture.Core.pdb": {
+          "buildAction": "None",
+          "codeLanguage": "any",
+          "copyToOutput": true
+        }
+      }
+    },
+    "Projects.Core/1.0.0": {
+      "type": "project",
+      "framework": ".NETFramework,Version=v4.5.2",
+      "compile": {
+        "bin/Debug/Projects.Core.dll": {}
+      },
+      "runtime": {
+        "bin/Debug/Projects.Core.dll": {}
+      },
+      "contentFiles": {
+        "bin/Debug/Projects.Core.pdb": {
+          "buildAction": "None",
+          "codeLanguage": "any",
+          "copyToOutput": true
+        }
+      }
+    },
+    "Projects.DataAccess/1.0.0": {
+      "type": "project",
+      "framework": ".NETFramework,Version=v4.5.2",
+      "compile": {
+        "bin/Debug/Projects.DataAccess.dll": {}
+      },
+      "runtime": {
+        "../packages/Microsoft.EntityFrameworkCore.1.0.0/lib/net451/Microsoft.EntityFrameworkCore.dll": {},
+        "../packages/Microsoft.EntityFrameworkCore.Relational.1.0.0/lib/net451/Microsoft.EntityFrameworkCore.Relational.dll": {},
+        "../packages/Microsoft.EntityFrameworkCore.SqlServer.1.0.0/lib/net451/Microsoft.EntityFrameworkCore.SqlServer.dll": {},
+        "../packages/Microsoft.Extensions.Caching.Abstractions.1.0.0/lib/netstandard1.0/Microsoft.Extensions.Caching.Abstractions.dll": {},
+        "../packages/Microsoft.Extensions.Caching.Memory.1.0.0/lib/net451/Microsoft.Extensions.Caching.Memory.dll": {},
+        "../packages/Microsoft.Extensions.DependencyInjection.1.0.0/lib/netstandard1.1/Microsoft.Extensions.DependencyInjection.dll": {},
+        "../packages/Microsoft.Extensions.DependencyInjection.Abstractions.1.0.0/lib/netstandard1.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {},
+        "../packages/Microsoft.Extensions.Logging.1.0.0/lib/netstandard1.1/Microsoft.Extensions.Logging.dll": {},
+        "../packages/Microsoft.Extensions.Logging.Abstractions.1.0.0/lib/netstandard1.1/Microsoft.Extensions.Logging.Abstractions.dll": {},
+        "../packages/Microsoft.Extensions.Options.1.0.0/lib/netstandard1.0/Microsoft.Extensions.Options.dll": {},
+        "../packages/Microsoft.Extensions.Primitives.1.0.0/lib/netstandard1.0/Microsoft.Extensions.Primitives.dll": {},
+        "../packages/Remotion.Linq.2.1.1/lib/net45/Remotion.Linq.dll": {},
+        "../packages/System.Collections.Immutable.1.2.0/lib/portable-net45+win8+wp8+wpa81/System.Collections.Immutable.dll": {},
+        "../packages/System.Diagnostics.DiagnosticSource.4.0.0/lib/portable-net45+win8+wpa81/System.Diagnostics.DiagnosticSource.dll": {},
+        "../packages/System.Interactive.Async.3.0.0/lib/net45/System.Interactive.Async.dll": {},
+        "bin/Debug/Projects.DataAccess.dll": {}
+      },
+      "contentFiles": {
+        "bin/Debug/Projects.DataAccess.pdb": {
+          "buildAction": "None",
+          "codeLanguage": "any",
+          "copyToOutput": true
+        }
+      }
+    }
+  }
+}
