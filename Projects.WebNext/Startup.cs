@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Session;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using Projects.DataAccess;
 using Projects.DataAccess.Account;
 using Projects.WebNext.Extensions;
+using Projects.WebNext.Security;
 
 namespace Projects.WebNext
 {
@@ -39,9 +39,11 @@ namespace Projects.WebNext
 
             // Add framework services.
             services.AddMvc();
-            services.AddTransient<IBus, Bus>();
 
-            // Add bus handlers.
+            services.AddScoped<PrincipalFactory>();
+
+            // Add bus and handlers.
+            services.AddTransient<IBus, Bus>();
             var registrator = new HandlerRegistrator((service, impl) =>
             {
                 services.AddTransient(service, impl);
@@ -63,7 +65,7 @@ namespace Projects.WebNext
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/error");
             }
 
             app.UseStaticFiles();

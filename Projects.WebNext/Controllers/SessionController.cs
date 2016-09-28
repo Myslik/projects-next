@@ -1,9 +1,8 @@
 ﻿using Architecture.Core;
 using Microsoft.AspNetCore.Mvc;
 using Projects.Account;
+using Projects.WebNext.Security;
 using Projects.WebNext.ViewModels;
-using System.Collections.Generic;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Projects.WebNext.Controllers
@@ -11,10 +10,12 @@ namespace Projects.WebNext.Controllers
     public class SessionController : Controller
     {
         private readonly IBus bus;
+        private readonly PrincipalFactory principalFactory;
 
-        public SessionController(IBus bus)
+        public SessionController(IBus bus, PrincipalFactory principalFactory)
         {
             this.bus = bus;
+            this.principalFactory = principalFactory;
         }
 
         [Route("login"), HttpGet]
@@ -30,7 +31,7 @@ namespace Projects.WebNext.Controllers
         {
             if (ModelState.IsValid)
             {
-                var principal = await CreatePrincipal(model.UserName);
+                var principal = await principalFactory.CreateAsync(model.UserName);
                 await HttpContext.Authentication.SignInAsync("ProjectsCookie", principal);
                 return RedirectToAction("Index", "Home");
             }
@@ -43,18 +44,6 @@ namespace Projects.WebNext.Controllers
         {
             await HttpContext.Authentication.SignOutAsync("ProjectsCookie");
             return RedirectToAction("Login", "Session");
-        }
-
-        private async Task<ClaimsPrincipal> CreatePrincipal(string userName)
-        {
-            var user = await bus.Send(new GetUserCommand(userName));
-            var claims = new List<Claim>();
-            claims.Add(new Claim(ClaimTypes.Name, user.UserName));
-            claims.Add(new Claim(ClaimTypes.Email, user.Email));
-
-            var identity = new ClaimsIdentity(claims, "ApplicationCookie");
-            var principal = new ClaimsPrincipal(identity);
-            return principal;
         }
     }
 }

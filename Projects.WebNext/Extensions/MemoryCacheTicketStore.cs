@@ -9,11 +9,11 @@ namespace Projects.WebNext.Extensions
     public class MemoryCacheTicketStore : ITicketStore
     {
         private const string KeyPrefix = "AuthSessionStore-";
-        private IMemoryCache _cache;
+        private IMemoryCache cache;
 
         public MemoryCacheTicketStore()
         {
-            _cache = new MemoryCache(new MemoryCacheOptions());
+            cache = new MemoryCache(new MemoryCacheOptions());
         }
 
         public async Task<string> StoreAsync(AuthenticationTicket ticket)
@@ -34,7 +34,7 @@ namespace Projects.WebNext.Extensions
             }
             options.SetSlidingExpiration(TimeSpan.FromHours(1)); // TODO: configurable.
 
-            _cache.Set(key, ticket, options);
+            cache.Set(key, ticket, options);
 
             return Task.FromResult(0);
         }
@@ -42,13 +42,13 @@ namespace Projects.WebNext.Extensions
         public Task<AuthenticationTicket> RetrieveAsync(string key)
         {
             AuthenticationTicket ticket;
-            _cache.TryGetValue(key, out ticket);
+            cache.TryGetValue(key, out ticket);
             return Task.FromResult(ticket);
         }
 
         public Task RemoveAsync(string key)
         {
-            _cache.Remove(key);
+            cache.Remove(key);
             return Task.FromResult(0);
         }
     }
