@@ -45,6 +45,8 @@
     <Compile Include="FlowDefinition.cs" />
     <Compile Include="FlowInvoker.cs" />
     <Compile Include="FlowNode.cs" />
+    <Compile Include="FlowRegistry.cs" />
+    <Compile Include="IFlowStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestFlowNode.cs" />
   </ItemGroup>

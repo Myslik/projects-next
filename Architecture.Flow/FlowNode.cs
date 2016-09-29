@@ -9,21 +9,4 @@ namespace Architecture.Flow
 
         public abstract FlowNode<TState> GetNext();
     }
-
-    public class FlowResult<TState> where TState : new()
-    {
-        public FlowResult(FlowToken token, TState state)
-        {
-            Token = token;
-            State = state;
-        }
-
-        public FlowToken Token { get; }
-        public TState State { get; }
-    }
-
-    public class FlowToken
-    {
-        
-    }
 }

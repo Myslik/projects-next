@@ -16,12 +16,16 @@ namespace Architecture.UnitTests
         public async Task SimpleTest()
         {
             requests.Clear();
+
             var provider = new UnitTestServiceProvider();
             provider.RegisterHandler<SimpleRequestHandler>();
             provider.RegisterHandler<SecondRequestHandler>();
             var bus = new Bus(provider);
-            var invoker = new FlowInvoker(bus);
+
+            var store = new FlowStore();
+            var invoker = new FlowInvoker(bus, store);
             await invoker.Invoke<SimpleFlowDefinition, SimpleState>(new SimpleState());
+
             Assert.Equal(2, requests.Count);
         }
 
@@ -32,6 +36,18 @@ namespace Architecture.UnitTests
                 return builder
                     .Request(s => new SimpleRequest())
                     .Request(s => new SecondRequest());
+            }
+        }
+
+        public class FlowStore : IFlowStore
+        {
+            public void Store<TDefinition, TState>(TDefinition definition, TState state, int index)
+                where TDefinition : FlowDefinition<TState>
+                where TState : new()
+            {
+                System.Diagnostics.Debug.WriteLine($"Definition: {definition.GetType().FullName}");
+                System.Diagnostics.Debug.WriteLine($"State: {state.GetType().FullName}");
+                System.Diagnostics.Debug.WriteLine($"Index: {index}");
             }
         }
 

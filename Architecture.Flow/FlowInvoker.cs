@@ -1,20 +1,18 @@
 ﻿using Architecture.Core;
 using System;
-using System.IO;
-using System.Runtime.Serialization;
-using System.Text;
 using System.Threading.Tasks;
-using System.Xml;
 
 namespace Architecture.Flow
 {
     public class FlowInvoker
     {
         private readonly IBus bus;
+        private readonly IFlowStore store;
 
-        public FlowInvoker(IBus bus)
+        public FlowInvoker(IBus bus, IFlowStore store)
         {
             this.bus = bus;
+            this.store = store;
         }
 
         public async Task<TState> Invoke<TDefinition, TState>(TState state)
@@ -26,6 +24,9 @@ namespace Architecture.Flow
 
             while(node != null)
             {
+                int index = definition.GetIndex(node);
+                store.Store(definition, state, index);
+
                 state = await node.Invoke(state, bus);
                 node = node.GetNext();
             }

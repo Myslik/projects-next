@@ -3,17 +3,22 @@
     public abstract class FlowDefinition<TState>
         where TState : new()
     {
-        private FlowNode<TState> start;
+        private FlowRegistry<TState> registry;
 
         public FlowDefinition()
         {
             var builder = new FlowBuilder<TState>();
-            start = OnDefinitionCreating(builder).Complete();
+            registry = OnDefinitionCreating(builder).Complete();
         }
 
-        public FlowNode<TState> GetNode()
+        internal FlowNode<TState> GetNode(int index = 0)
         {
-            return start;
+            return registry.ByIndex(index);
+        }
+
+        internal int GetIndex(FlowNode<TState> node)
+        {
+            return registry.IndexOf(node);
         }
 
         protected abstract FlowBuilder<TState> OnDefinitionCreating(FlowBuilder<TState> builder);

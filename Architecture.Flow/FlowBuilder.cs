@@ -3,17 +3,19 @@ using System;
 
 namespace Architecture.Flow
 {
+    internal delegate FlowNode<TState> BuildNode<TState>(FlowRegistry<TState> registry) where TState : new();
+
     public class FlowBuilder<TState> where TState : new()
     {
-        private Func<FlowNode<TState>> build = () => null;
-        private Func<FlowNode<TState>> complete = () => null;
+        private BuildNode<TState> build = r => null;
+        private BuildNode<TState> complete = r => null;
 
         internal FlowBuilder()
         {
-            complete = () => build();
+            complete = r => build(r);
         }
 
-        private FlowBuilder(Func<FlowNode<TState>> complete)
+        private FlowBuilder(BuildNode<TState> complete)
         {
             this.complete = complete;
         }
@@ -21,13 +23,21 @@ namespace Architecture.Flow
         public FlowBuilder<TState> Request<TRequest>(Func<TState, TRequest> requestFactory) where TRequest : IRequest
         {
             var builder = new FlowBuilder<TState>(complete);
-            build = () => new RequestFlowNode<TRequest, TState>(requestFactory, builder.build());
+            build = r =>
+            {
+                var next = builder.build(r);
+                var node = new RequestFlowNode<TRequest, TState>(requestFactory, next);
+                r.Add(node);
+                return node;
+            };
             return builder;
         }
 
-        internal FlowNode<TState> Complete()
+        internal FlowRegistry<TState> Complete()
         {
-            return complete();
+            var registry = new FlowRegistry<TState>();
+            complete(registry);
+            return registry;
         }
     }
 }
