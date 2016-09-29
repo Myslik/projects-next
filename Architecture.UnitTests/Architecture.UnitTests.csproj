@@ -72,6 +72,7 @@
     <Compile Include="FailingSimpleRequestHandler.cs" />
     <Compile Include="FirstRequest.cs" />
     <Compile Include="FirstRequestHandler.cs" />
+    <Compile Include="FlowTests.cs" />
     <Compile Include="HandlerRegistratorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecondRequest.cs" />
@@ -89,6 +90,10 @@
     <ProjectReference Include="..\Architecture.Core\Architecture.Core.csproj">
       <Project>{6eace99c-d11a-4edf-89d1-47601a3d66fe}</Project>
       <Name>Architecture.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Architecture.Flow\Architecture.Flow.csproj">
+      <Project>{7085CAFD-E7A3-4216-AF02-44C807A1FB3F}</Project>
+      <Name>Architecture.Flow</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

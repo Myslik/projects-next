@@ -4,25 +4,25 @@ using System.Threading.Tasks;
 
 namespace Architecture.Flow
 {
-    internal class RequestFlowNode<TRequest, TState> : FlowNode<TState>
+    public class RequestFlowNode<TRequest, TState> : FlowNode<TState>
         where TRequest : IRequest
         where TState : new()
     {
         private Func<TState, TRequest> requestFactory;
+        private FlowNode<TState> next;
 
-        public RequestFlowNode(Func<TState, TRequest> requestFactory)
+        public RequestFlowNode(Func<TState, TRequest> requestFactory, FlowNode<TState> next)
         {
             this.requestFactory = requestFactory;
+            this.next = next;
         }
 
-        internal FlowNode<TState> Next { get; set; }
-
-        internal override string GetDirection()
+        public override FlowNode<TState> GetNext()
         {
-            throw new NotImplementedException();
+            return next;
         }
 
-        internal async override Task<TState> Invoke(TState state)
+        public async override Task<TState> Invoke(TState state)
         {
             var request = requestFactory.Invoke(state);
             await Bus.Send(request);
