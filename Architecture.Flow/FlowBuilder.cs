@@ -8,7 +8,7 @@ namespace Architecture.Flow
         private Func<FlowNode<TState>> build = () => null;
         private Func<FlowNode<TState>> complete = () => null;
 
-        public FlowBuilder()
+        internal FlowBuilder()
         {
             complete = () => build();
         }
@@ -25,7 +25,7 @@ namespace Architecture.Flow
             return builder;
         }
 
-        public FlowNode<TState> Complete()
+        internal FlowNode<TState> Complete()
         {
             return complete();
         }

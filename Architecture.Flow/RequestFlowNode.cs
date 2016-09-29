@@ -22,10 +22,10 @@ namespace Architecture.Flow
             return next;
         }
 
-        public async override Task<TState> Invoke(TState state)
+        public async override Task<TState> Invoke(TState state, IBus bus)
         {
             var request = requestFactory.Invoke(state);
-            await Bus.Send(request);
+            await bus.Send(request);
             return state;
         }
     }
