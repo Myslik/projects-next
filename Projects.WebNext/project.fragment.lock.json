@@ -1,23 +1,6 @@
 {
   "version": 2,
   "exports": {
-    "Architecture.Core/1.0.0": {
-      "type": "project",
-      "framework": ".NETFramework,Version=v4.5.2",
-      "compile": {
-        "bin/Debug/Architecture.Core.dll": {}
-      },
-      "runtime": {
-        "bin/Debug/Architecture.Core.dll": {}
-      },
-      "contentFiles": {
-        "bin/Debug/Architecture.Core.pdb": {
-          "buildAction": "None",
-          "codeLanguage": "any",
-          "copyToOutput": true
-        }
-      }
-    },
     "Projects.Core/1.0.0": {
       "type": "project",
       "framework": ".NETFramework,Version=v4.5.2",
@@ -25,6 +8,8 @@
         "bin/Debug/Projects.Core.dll": {}
       },
       "runtime": {
+        "../packages/Microsoft.Extensions.DependencyInjection.Abstractions.1.0.0/lib/netstandard1.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {},
+        "../packages/NArchitecture.1.0.0/lib/net452/NArchitecture.dll": {},
         "bin/Debug/Projects.Core.dll": {}
       },
       "contentFiles": {
@@ -53,6 +38,7 @@
         "../packages/Microsoft.Extensions.Logging.Abstractions.1.0.0/lib/netstandard1.1/Microsoft.Extensions.Logging.Abstractions.dll": {},
         "../packages/Microsoft.Extensions.Options.1.0.0/lib/netstandard1.0/Microsoft.Extensions.Options.dll": {},
         "../packages/Microsoft.Extensions.Primitives.1.0.0/lib/netstandard1.0/Microsoft.Extensions.Primitives.dll": {},
+        "../packages/NArchitecture.1.0.0/lib/net452/NArchitecture.dll": {},
         "../packages/Remotion.Linq.2.1.1/lib/net45/Remotion.Linq.dll": {},
         "../packages/System.Collections.Immutable.1.2.0/lib/portable-net45+win8+wp8+wpa81/System.Collections.Immutable.dll": {},
         "../packages/System.Diagnostics.DiagnosticSource.4.0.0/lib/portable-net45+win8+wpa81/System.Diagnostics.DiagnosticSource.dll": {},

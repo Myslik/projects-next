@@ -1,11 +1,11 @@
-﻿using Architecture.Core;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using NArchitecture;
 using Projects.DataAccess;
 using Projects.DataAccess.Account;
 using Projects.WebNext.Extensions;
@@ -43,13 +43,11 @@ namespace Projects.WebNext
             services.AddScoped<PrincipalFactory>();
 
             // Add bus and handlers.
-            services.AddTransient<IBus, Bus>();
-            var registrator = new HandlerRegistrator((service, impl) =>
+            services.AddServiceBus(configure =>
             {
-                services.AddTransient(service, impl);
+                configure.Requests.AddRequestHandler<UserQueryHandler>();
+                configure.Requests.AddRequestHandler<GetUserCommandHandler>();
             });
-            registrator.RegisterHandler<UserQueryHandler>();
-            registrator.RegisterHandler<GetUserCommandHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

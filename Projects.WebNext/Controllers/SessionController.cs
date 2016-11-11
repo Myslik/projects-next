@@ -1,5 +1,5 @@
-﻿using Architecture.Core;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using NArchitecture;
 using Projects.Account;
 using Projects.WebNext.Security;
 using Projects.WebNext.ViewModels;
@@ -9,10 +9,10 @@ namespace Projects.WebNext.Controllers
 {
     public class SessionController : Controller
     {
-        private readonly IBus bus;
+        private readonly IServiceBus bus;
         private readonly PrincipalFactory principalFactory;
 
-        public SessionController(IBus bus, PrincipalFactory principalFactory)
+        public SessionController(IServiceBus bus, PrincipalFactory principalFactory)
         {
             this.bus = bus;
             this.principalFactory = principalFactory;
@@ -21,7 +21,7 @@ namespace Projects.WebNext.Controllers
         [Route("login"), HttpGet]
         public async Task<IActionResult> Login()
         {
-            var users = await bus.Send(new UserQuery());
+            var users = await bus.Request(User, new UserQuery());
             var model = new LoginViewModel(users);
             return View(model);
         }

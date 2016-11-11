@@ -1,4 +1,4 @@
-﻿using Architecture.Core;
+﻿using NArchitecture;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;

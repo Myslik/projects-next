@@ -1,5 +1,5 @@
-﻿using Architecture.Core;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using NArchitecture;
 using Projects.Account;
 using System.Linq;
 using System.Threading;
@@ -7,18 +7,19 @@ using System.Threading.Tasks;
 
 namespace Projects.DataAccess.Account
 {
-    public class GetUserCommandHandler : IHandleRequest<GetUserCommand, User>
+    public class GetUserCommandHandler : RequestHandler<GetUserCommand, User>
     {
-        private readonly ProjectsContext context;
+        private readonly ProjectsContext db;
 
-        public GetUserCommandHandler(ProjectsContext context)
+        public GetUserCommandHandler(ProjectsContext db)
         {
-            this.context = context;
+            this.db = db;
 
         }
-        public async Task<User> Handle(GetUserCommand request, CancellationToken cancellationToken = default(CancellationToken))
+
+        protected override async Task Handle(RequestHandlerContext<User> context, GetUserCommand request)
         {
-            return await context.Users.Where(u => u.UserName == request.UserName).SingleAsync();
+            context.Response = await this.db.Users.Where(u => u.UserName == request.UserName).SingleAsync();
         }
     }
 }

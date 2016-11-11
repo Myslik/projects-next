@@ -74,6 +74,10 @@
       <HintPath>..\packages\Microsoft.Extensions.Primitives.1.0.0\lib\netstandard1.0\Microsoft.Extensions.Primitives.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="NArchitecture, Version=1.0.0.46, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NArchitecture.1.0.0\lib\net452\NArchitecture.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Remotion.Linq, Version=2.1.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
       <HintPath>..\packages\Remotion.Linq.2.1.1\lib\net45\Remotion.Linq.dll</HintPath>
       <Private>True</Private>
@@ -113,10 +117,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Architecture.Core\Architecture.Core.csproj">
-      <Project>{6EACE99C-D11A-4EDF-89D1-47601A3D66FE}</Project>
-      <Name>Architecture.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Projects.Core\Projects.Core.csproj">
       <Project>{6f7374a6-23e2-4a81-ad0d-8dd6cc5251d8}</Project>
       <Name>Projects.Core</Name>

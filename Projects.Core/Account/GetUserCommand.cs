@@ -1,4 +1,4 @@
-﻿using Architecture.Core;
+﻿using NArchitecture;
 
 namespace Projects.Account
 {

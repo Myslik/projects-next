@@ -1,25 +1,24 @@
-﻿using Architecture.Core;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using NArchitecture;
 using Projects.Account;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Projects.DataAccess.Account
 {
-    public class UserQueryHandler : IHandleRequest<UserQuery, IEnumerable<User>>
+    public class UserQueryHandler : RequestHandler<UserQuery, IEnumerable<User>>
     {
-        private readonly ProjectsContext context;
+        private readonly ProjectsContext db;
 
-        public UserQueryHandler(ProjectsContext context)
+        public UserQueryHandler(ProjectsContext db)
         {
-            this.context = context;
+            this.db = db;
         }
 
-        public async Task<IEnumerable<User>> Handle(UserQuery request, CancellationToken cancellationToken = default(CancellationToken))
+        protected override async Task Handle(RequestHandlerContext<IEnumerable<User>> context, UserQuery request)
         {
-            return await context.Users.Where(request.Expression).AsNoTracking().ToArrayAsync();
+            context.Response = await db.Users.Where(request.Expression).AsNoTracking().ToArrayAsync();
         }
     }
 }
